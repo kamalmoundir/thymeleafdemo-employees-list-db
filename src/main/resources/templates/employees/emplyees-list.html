@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h3>Employee directory</h3>
+		<hr>
+		<!-- Add button -->
+
+		<a class="btn btn-primary btn-sm mb-3"
+			th:href="@{/employees/ShowEmployeeForm}">Add Employee</a>
+
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">First Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="theemployees : ${employees}">
+					<td th:text="${theemployees.firstName}" />
+					<td th:text="${theemployees.lastName}" />
+					<td th:text="${theemployees.email}" />
+					<td><a
+						th:href="@{/employees/ShowUpdateForm(employeeId=${theemployees.id})}"
+						class="btn btn-info btn-sm ">Update</a> <a
+						th:href="@{/employees/DeleteEmployee(employeeId=${theemployees.id})}"
+						class="btn btn-danger btn-sm" onclick="return confirm_delete()">Delete</a>
+					</td>
+
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+     function confirm_delete() {
+     return confirm('Are you sure you want to delete employee?');
+       }
+    </script>
+</body>
+</html>
